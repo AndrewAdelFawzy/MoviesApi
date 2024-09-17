@@ -47,7 +47,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddCors();
 builder.Services.AddSwaggerGen();
-builder.Services.Configure<JWt>(builder.Configuration.GetSection("JWT"));
+builder.Services.Configure<JWT>(builder.Configuration.GetSection("JWT"));
 
 var app = builder.Build();
 
