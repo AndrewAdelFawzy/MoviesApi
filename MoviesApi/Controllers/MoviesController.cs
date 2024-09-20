@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MoviesApi.Controllers
@@ -143,6 +144,7 @@ namespace MoviesApi.Controllers
 		}
 
 		[HttpDelete("{Id}")]
+		[Authorize(Roles ="Admin")]
 		public async Task<IActionResult> DeleteAsync(int Id)
 		{
 			var movie = await _context.Movies.FindAsync(Id);

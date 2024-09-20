@@ -1,7 +1,9 @@
 ﻿namespace MoviesApi.Services
 {
-	public interface IAuthService
+    public interface IAuthService
 	{
-		Task<AuthModel> RegisterAsync(RegisterModel model);
+		Task<AuthModel> RegisterAsync(RegisterDto model);
+		Task<AuthModel> GetTokenAsync(TokenRequestDto model);
+		Task<string> AssigenRoleAsync(AssigenRoleDto model);
 	}
 }
