@@ -4,7 +4,7 @@ using MoviesApi.Services;
 
 namespace MoviesApi.Controllers
 {
-	[Route("api/[controller]")]
+    [Route("api/[controller]")]
 	[ApiController]
 	public class AuthController : ControllerBase
 	{
@@ -16,7 +16,7 @@ namespace MoviesApi.Controllers
 		}
 
 		[HttpPost("register")]
-		public async Task<IActionResult> RegisterAsync([FromForm]RegisterModel model)
+		public async Task<IActionResult> RegisterAsync([FromForm]RegisterDto model)
 		{
 
 			var result = await _authService.RegisterAsync(model);
@@ -25,6 +25,32 @@ namespace MoviesApi.Controllers
 				return BadRequest(result.Message);
 
 			return Ok(result);
+		}
+
+		[HttpPost("token")]
+		public async Task<IActionResult> GetTokenAsync([FromForm] TokenRequestDto model)
+		{
+
+			 var result =await _authService.GetTokenAsync(model);
+
+			if(!result.IsAuthenticated)
+				return BadRequest(result.Message);
+
+			return Ok(result);
+
+		}
+
+		[HttpPost("assigenRole")]
+		public async Task<IActionResult> AssigenRoleAsync([FromForm] AssigenRoleDto model)
+		{
+
+			var result = await _authService.AssigenRoleAsync(model);
+
+			if(!string.IsNullOrEmpty(result))
+				return BadRequest(result);
+
+			return Ok(model);
+
 		}
 	}
 }
